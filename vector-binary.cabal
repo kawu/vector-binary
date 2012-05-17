@@ -1,0 +1,10 @@
+Name:               vector-binary
+Version:            0.0.0
+Synopsis:           Binary instances for vector types
+Author:             Don Stewart, Jakub Waszczuk
+Maintainer:         waszczuk.kuba@gmail.com
+Build-type:         Simple
+Exposed-modules:    Data.Vector.Binary
+Build-Depends:      base
+                  , vector
+		  , binary
