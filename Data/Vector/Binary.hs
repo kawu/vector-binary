@@ -1,7 +1,8 @@
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
 module Data.Vector.Binary where
 
 import Data.Binary
-import Control.Monad
 import System.IO.Unsafe
 import qualified Data.Vector.Generic as G
 import qualified Data.Vector.Generic.Mutable as M
@@ -9,7 +10,10 @@ import qualified Data.Vector.Generic.Mutable as M
 import qualified Data.Vector as V
 import qualified Data.Vector.Unboxed as U
 
--- | Modified code from vector-binary-instances package.
+-- Both binary instances below originate from the vector-binary-instances
+-- library.  To avoid the overlapping instances problem the instances
+-- are restricted to monomorphic vector types.
+
 instance (U.Unbox e, Binary e) => Binary (U.Vector e) where
     put v = do
         put (G.length v)
@@ -36,7 +40,6 @@ instance (U.Unbox e, Binary e) => Binary (U.Vector e) where
 
         lift $ G.unsafeFreeze mv
 
--- | Modified code from vector-binary-instances package.
 instance Binary e => Binary (V.Vector e) where
     put v = do
         put (G.length v)
@@ -63,4 +66,5 @@ instance Binary e => Binary (V.Vector e) where
 
         lift $ G.unsafeFreeze mv
 
+lift :: IO b -> Get b
 lift = return .unsafePerformIO
