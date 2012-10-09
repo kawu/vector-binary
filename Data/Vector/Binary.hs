@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Data.Vector.Binary where
+module Data.Vector.Binary () where
 
 import Data.Binary
 import System.IO.Unsafe
